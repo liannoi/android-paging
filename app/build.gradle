@@ -71,8 +71,19 @@ dependencies {
 
     // App dependencies
     implementation "androidx.constraintlayout:constraintlayout:$constraintVersion"
+    implementation "androidx.recyclerview:recyclerview:$recyclerVersion"
+    implementation "androidx.cardview:cardview:$cardVersion"
 
     // Architecture Components
+    kapt "androidx.room:room-compiler:$roomVersion"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    implementation "androidx.room:room-rxjava2:$roomVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 

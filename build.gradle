@@ -44,5 +44,11 @@ ext {
 
     // App dependencies
     constraintVersion = "2.0.0"
-    fragmentKtxVersion= "1.2.5"
+    fragmentKtxVersion = "1.2.5"
+    rxJavaVersion = "2.2.19"
+    rxAndroidVersion = "2.1.1"
+    roomVersion = "2.2.5"
+    recyclerVersion = "1.1.0"
+    cardVersion = "1.0.0"
+    archLifecycleVersion = "2.2.0"
 }
