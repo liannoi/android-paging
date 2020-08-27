@@ -2,6 +2,7 @@ package org.itstep.liannoi.androidpaging.presentation.users.paging
 
 import android.util.Log
 import androidx.paging.PositionalDataSource
+import org.itstep.liannoi.androidpaging.application.ApplicationDefaults
 import org.itstep.liannoi.androidpaging.application.common.interfaces.UsersRepository
 import org.itstep.liannoi.androidpaging.application.storage.core.paging.PagingDetails
 import org.itstep.liannoi.androidpaging.application.storage.users.models.User
@@ -20,7 +21,7 @@ class UsersPagingDataSource constructor(
             override fun onUsersFetchedSuccess(users: List<User>) {
                 Log.d(TAG, "onUsersFetchedSuccess: startPosition - $startPosition")
                 Log.d(TAG, "onUsersFetchedSuccess: loadSize - $itemsPerPage")
-                callback.onResult(users, 0)
+                callback.onResult(users, ApplicationDefaults.PAGING_START_POSITION)
             }
 
             override fun onUsersFetchedError(exception: String) {
