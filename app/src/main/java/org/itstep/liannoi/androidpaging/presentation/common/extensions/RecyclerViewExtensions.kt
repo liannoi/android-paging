@@ -10,7 +10,7 @@ import org.itstep.liannoi.androidpaging.presentation.users.paging.UsersPagingAda
 import org.itstep.liannoi.androidpaging.presentation.users.paging.UsersPagingDataSource
 import java.util.concurrent.Executors
 
-fun toPagedList(): PagedList<User> {
+fun setupUsersPaging(): PagedList<User> {
     val config: PagedList.Config = PagedList.Config.Builder()
         .setEnablePlaceholders(false)
         .setInitialLoadSizeHint(20)
@@ -25,7 +25,7 @@ fun toPagedList(): PagedList<User> {
 
 @BindingAdapter("app:items")
 fun RecyclerView.adapt(items: List<User>?) {
-    (adapter as UsersPagingAdapter).submitList(toPagedList())
+    (adapter as UsersPagingAdapter).submitList(setupUsersPaging())
 }
 
 /**

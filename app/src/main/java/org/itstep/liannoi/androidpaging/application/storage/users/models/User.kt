@@ -8,5 +8,8 @@ import androidx.room.PrimaryKey
 data class User constructor(
     @ColumnInfo(name = "UserId") @PrimaryKey(autoGenerate = true) val id: Int = 0,
     @ColumnInfo(name = "Name") val name: String = "",
-    @ColumnInfo(name = "Salary") val salary: Double = 0.0
-)
+    @ColumnInfo(name = "Salary") val salary: Int = 0
+) {
+    val formattedSalary: String
+        get() = "$salary $"
+}
