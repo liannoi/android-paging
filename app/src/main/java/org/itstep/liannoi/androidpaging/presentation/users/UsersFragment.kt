@@ -8,12 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import org.itstep.liannoi.androidpaging.databinding.FragmentUsersBinding
 import org.itstep.liannoi.androidpaging.presentation.common.extensions.getViewModelFactory
+import org.itstep.liannoi.androidpaging.presentation.users.adapters.UsersPagingAdapter
 
 class UsersFragment : Fragment() {
 
     private val viewModel: UsersViewModel by viewModels { getViewModelFactory() }
     private lateinit var viewDataBinding: FragmentUsersBinding
-    private lateinit var listAdapter: UsersAdapter
+    private lateinit var listAdapter: UsersPagingAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +39,7 @@ class UsersFragment : Fragment() {
     ///////////////////////////////////////////////////////////////////////////
 
     private fun setupListAdapter() {
-        listAdapter = UsersAdapter(viewDataBinding.viewmodel ?: return)
+        listAdapter = UsersPagingAdapter(viewDataBinding.viewmodel ?: return)
         viewDataBinding.usersList.adapter = listAdapter
     }
 }

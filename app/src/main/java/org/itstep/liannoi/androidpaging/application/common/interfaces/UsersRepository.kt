@@ -12,4 +12,5 @@ interface UsersRepository : Repository<CreateCommand, CreateCommand.Handler,
         ListQuery, ListQuery.Handler,
         DetailQuery, DetailQuery.Handler,
         UpdateCommand, UpdateCommand.Handler,
-        DeleteCommand, DeleteCommand.Handler>, Disposable
+        DeleteCommand, DeleteCommand.Handler>,
+    Disposable

@@ -38,7 +38,7 @@ class UsersViewModel constructor(
     // Nested classes
     ///////////////////////////////////////////////////////////////////////////
 
-    inner class ListQueryHandler : ListQuery.Handler {
+    private inner class ListQueryHandler : ListQuery.Handler {
 
         override fun onUsersFetchedSuccess(users: List<User>) {
             this@UsersViewModel._users.value = users
@@ -49,7 +49,7 @@ class UsersViewModel constructor(
         }
     }
 
-    inner class SeedingHandler : SeedingCommand.Callback {
+    private inner class SeedingHandler : SeedingCommand.Callback {
 
         override fun onSeedingSuccess() {
             usersRepository.getAll(ListQuery(), ListQueryHandler())
