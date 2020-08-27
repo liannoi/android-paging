@@ -33,7 +33,7 @@ class DefaultUsersRepository constructor(
     }
 
     override fun getAll(request: ListQuery, handler: ListQuery.Handler) {
-        usersLocalDataSource.getAll()
+        usersLocalDataSource.getAll(request.pagingDetails)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(

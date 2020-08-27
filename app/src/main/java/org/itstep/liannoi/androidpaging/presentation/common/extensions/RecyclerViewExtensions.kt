@@ -10,7 +10,6 @@ import org.itstep.liannoi.androidpaging.presentation.users.paging.UsersPagingAda
 import org.itstep.liannoi.androidpaging.presentation.users.paging.UsersPagingDataSource
 import java.util.concurrent.Executors
 
-
 fun toPagedList(): PagedList<User> {
     val config: PagedList.Config = PagedList.Config.Builder()
         .setEnablePlaceholders(false)

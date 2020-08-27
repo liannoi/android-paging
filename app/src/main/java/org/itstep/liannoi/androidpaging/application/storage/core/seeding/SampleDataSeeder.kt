@@ -1,7 +1,8 @@
-package org.itstep.liannoi.androidpaging.application.storage.seeding
+package org.itstep.liannoi.androidpaging.application.storage.core.seeding
 
 import org.itstep.liannoi.androidpaging.application.common.interfaces.UsersRepository
 import org.itstep.liannoi.androidpaging.application.common.storage.Seeder
+import org.itstep.liannoi.androidpaging.application.storage.core.paging.PagingDetails
 import org.itstep.liannoi.androidpaging.application.storage.users.commands.CreateCommand
 import org.itstep.liannoi.androidpaging.application.storage.users.models.User
 import org.itstep.liannoi.androidpaging.application.storage.users.queries.ListQuery
@@ -11,7 +12,7 @@ class SampleDataSeeder constructor(
 ) : Seeder {
 
     override fun seedAll() {
-        usersRepository.getAll(ListQuery(), ListQueryHandler())
+        usersRepository.getAll(ListQuery(PagingDetails()), ListQueryHandler())
     }
 
     ///////////////////////////////////////////////////////////////////////////

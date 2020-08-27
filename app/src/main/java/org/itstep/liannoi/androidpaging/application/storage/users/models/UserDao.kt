@@ -8,6 +8,6 @@ import org.itstep.liannoi.androidpaging.application.common.storage.BaseDao
 @Dao
 interface UserDao : BaseDao<User> {
 
-    @Query("SELECT * FROM Users")
-    fun getAll(): Maybe<List<User>>
+    @Query("SELECT U.UserId, U.Name, U.Salary FROM Users AS U ORDER BY U.UserId ASC LIMIT :itemsPerPage OFFSET :startPosition")
+    fun getAll(startPosition: Int = 0, itemsPerPage: Int = 20): Maybe<List<User>>
 }

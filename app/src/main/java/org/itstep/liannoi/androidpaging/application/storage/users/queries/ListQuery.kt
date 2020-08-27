@@ -1,10 +1,10 @@
 package org.itstep.liannoi.androidpaging.application.storage.users.queries
 
+import org.itstep.liannoi.androidpaging.application.storage.core.paging.PagingDetails
 import org.itstep.liannoi.androidpaging.application.storage.users.models.User
 
 class ListQuery constructor(
-    private val startPosition: Int = 0,
-    private val loadSize: Int = 0
+    val pagingDetails: PagingDetails
 ) {
 
     interface Handler {

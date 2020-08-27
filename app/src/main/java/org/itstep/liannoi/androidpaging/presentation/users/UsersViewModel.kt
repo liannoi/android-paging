@@ -5,7 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import org.itstep.liannoi.androidpaging.application.common.interfaces.UsersRepository
-import org.itstep.liannoi.androidpaging.application.storage.seeding.SeedingCommand
+import org.itstep.liannoi.androidpaging.application.storage.core.paging.PagingDetails
+import org.itstep.liannoi.androidpaging.application.storage.core.seeding.SeedingCommand
 import org.itstep.liannoi.androidpaging.application.storage.users.models.User
 import org.itstep.liannoi.androidpaging.application.storage.users.queries.ListQuery
 
@@ -52,7 +53,7 @@ class UsersViewModel constructor(
     private inner class SeedingHandler : SeedingCommand.Callback {
 
         override fun onSeedingSuccess() {
-            usersRepository.getAll(ListQuery(), ListQueryHandler())
+            usersRepository.getAll(ListQuery(PagingDetails()), ListQueryHandler())
         }
     }
 }

@@ -1,4 +1,4 @@
-package org.itstep.liannoi.androidpaging.application.storage.seeding
+package org.itstep.liannoi.androidpaging.application.storage.core.seeding
 
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
