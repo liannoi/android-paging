@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import org.itstep.liannoi.androidpaging.application.common.interfaces.UsersRepository
+import org.itstep.liannoi.androidpaging.application.storage.seeding.SeedingCommand
+import org.itstep.liannoi.androidpaging.application.storage.users.commands.CreateCommand
 import org.itstep.liannoi.androidpaging.application.storage.users.models.User
 import org.itstep.liannoi.androidpaging.application.storage.users.queries.ListQuery
 
@@ -15,6 +17,7 @@ class UsersViewModel constructor(
     val users: LiveData<List<User>> = _users
 
     init {
+        seeding()
         loadUsers()
     }
 
@@ -31,6 +34,10 @@ class UsersViewModel constructor(
     ///////////////////////////////////////////////////////////////////////////
     // Helpers
     ///////////////////////////////////////////////////////////////////////////
+
+    private fun seeding() {
+        SeedingCommand.Handler(usersRepository).handle()
+    }
 
     private fun loadUsers() {
         usersRepository.getAll(ListQuery(), ListQueryHandler())

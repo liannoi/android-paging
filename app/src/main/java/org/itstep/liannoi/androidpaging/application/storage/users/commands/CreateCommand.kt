@@ -1,6 +1,13 @@
 package org.itstep.liannoi.androidpaging.application.storage.users.commands
 
-class CreateCommand {
+import org.itstep.liannoi.androidpaging.application.storage.users.models.User
 
-    interface Handler
+class CreateCommand(val user: User) {
+
+    interface Handler {
+
+        fun onUserCreatedSuccess()
+
+        fun onUserCreatedError(exception: String)
+    }
 }

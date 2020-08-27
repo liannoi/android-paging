@@ -10,7 +10,7 @@ class UsersLocalDataSource constructor(
 ) : LocalDataSource<User, Int> {
 
     override fun create(entity: User) {
-        TODO("Not yet implemented")
+        userDao.create(entity)
     }
 
     override fun getAll(): Maybe<List<User>> = userDao.getAll()

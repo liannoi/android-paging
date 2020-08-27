@@ -1,5 +1,6 @@
 package org.itstep.liannoi.androidpaging.application.storage.users
 
+import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -22,7 +23,13 @@ class DefaultUsersRepository constructor(
     private val disposable: CompositeDisposable = CompositeDisposable()
 
     override fun create(request: CreateCommand, handler: CreateCommand.Handler) {
-        /* no-op */
+        Completable.fromAction { usersLocalDataSource.create(request.user) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { handler.onUserCreatedSuccess() },
+                { handler.onUserCreatedError(it.message.toString()) }
+            ).follow()
     }
 
     override fun getAll(request: ListQuery, handler: ListQuery.Handler) {
