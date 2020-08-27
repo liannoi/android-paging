@@ -12,6 +12,17 @@ class UsersAdapter constructor(
     private val viewModel: UsersViewModel
 ) : ListAdapter<User, UsersAdapter.ViewHolder>(UsersDiffCallback()) {
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder.from(parent)
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(viewModel, getItem(position))
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Nested classes
+    ///////////////////////////////////////////////////////////////////////////
+
     class ViewHolder private constructor(
         private val binding: ItemUserBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -36,12 +47,5 @@ class UsersAdapter constructor(
 
         override fun areContentsTheSame(oldItem: User, newItem: User): Boolean =
             oldItem == newItem
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-        ViewHolder.from(parent)
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(viewModel, getItem(position))
     }
 }

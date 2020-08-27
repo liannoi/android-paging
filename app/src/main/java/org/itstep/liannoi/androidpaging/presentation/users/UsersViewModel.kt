@@ -9,30 +9,13 @@ import org.itstep.liannoi.androidpaging.application.storage.users.queries.ListQu
 
 class UsersViewModel constructor(
     private val usersRepository: UsersRepository
-) : ViewModel(),
-    ListQuery.Handler {
+) : ViewModel() {
 
     private val _users: MutableLiveData<List<User>> = MutableLiveData()
     val users: LiveData<List<User>> = _users
 
     init {
         loadUsers()
-    }
-
-    override fun onUsersFetchedSuccess(users: List<User>) {
-        _users.value = users
-    }
-
-    override fun onUsersFetchedError(exception: String) {
-        /* no-op */
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Helpers
-    ///////////////////////////////////////////////////////////////////////////
-
-    private fun loadUsers() {
-        usersRepository.getAll(ListQuery(), this)
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -43,5 +26,28 @@ class UsersViewModel constructor(
         super.onCleared()
         usersRepository.stop()
         usersRepository.destroy()
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Helpers
+    ///////////////////////////////////////////////////////////////////////////
+
+    private fun loadUsers() {
+        usersRepository.getAll(ListQuery(), ListQueryHandler())
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Nested classes
+    ///////////////////////////////////////////////////////////////////////////
+
+    private inner class ListQueryHandler : ListQuery.Handler {
+
+        override fun onUsersFetchedSuccess(users: List<User>) {
+            _users.value = users
+        }
+
+        override fun onUsersFetchedError(exception: String) {
+            /* no-op */
+        }
     }
 }
