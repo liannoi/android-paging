@@ -18,10 +18,16 @@ class SampleDataSeeder constructor(
     ///////////////////////////////////////////////////////////////////////////
 
     private fun seedUsers() {
-        usersRepository.create(
-            CreateCommand(User(name = "Sherri Mason", salary = 6100.0)),
-            CreateCommandHandler()
+        val users: List<User> = listOf(
+            User(name = "Sherri Mason", salary = 6100.0),
+            User(name = "Gary Carroll", salary = 2900.0),
+            User(name = "Margaret Horne", salary = 3100.0),
+            User(name = "Michael Rodriquez", salary = 4600.0),
+            User(name = "Patricia Bookout", salary = 4000.0)
         )
+
+        val handler = CreateCommandHandler()
+        users.stream().forEach { usersRepository.create(CreateCommand(it), handler) }
     }
 
     ///////////////////////////////////////////////////////////////////////////

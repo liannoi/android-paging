@@ -3,9 +3,9 @@ package org.itstep.liannoi.androidpaging.presentation.users
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import io.reactivex.disposables.CompositeDisposable
 import org.itstep.liannoi.androidpaging.application.common.interfaces.UsersRepository
 import org.itstep.liannoi.androidpaging.application.storage.seeding.SeedingCommand
-import org.itstep.liannoi.androidpaging.application.storage.users.commands.CreateCommand
 import org.itstep.liannoi.androidpaging.application.storage.users.models.User
 import org.itstep.liannoi.androidpaging.application.storage.users.queries.ListQuery
 
@@ -13,12 +13,13 @@ class UsersViewModel constructor(
     private val usersRepository: UsersRepository
 ) : ViewModel() {
 
+    private val disposable: CompositeDisposable = CompositeDisposable()
+
     private val _users: MutableLiveData<List<User>> = MutableLiveData()
     val users: LiveData<List<User>> = _users
 
     init {
-        seeding()
-        loadUsers()
+        SeedingCommand.Handler(usersRepository, disposable).handle(SeedingHandler())
     }
 
     ///////////////////////////////////////////////////////////////////////////
@@ -27,34 +28,31 @@ class UsersViewModel constructor(
 
     override fun onCleared() {
         super.onCleared()
+        disposable.clear()
+        disposable.dispose()
         usersRepository.stop()
         usersRepository.destroy()
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Helpers
-    ///////////////////////////////////////////////////////////////////////////
-
-    private fun seeding() {
-        SeedingCommand.Handler(usersRepository).handle()
-    }
-
-    private fun loadUsers() {
-        usersRepository.getAll(ListQuery(), ListQueryHandler())
     }
 
     ///////////////////////////////////////////////////////////////////////////
     // Nested classes
     ///////////////////////////////////////////////////////////////////////////
 
-    private inner class ListQueryHandler : ListQuery.Handler {
+    inner class ListQueryHandler : ListQuery.Handler {
 
         override fun onUsersFetchedSuccess(users: List<User>) {
-            _users.value = users
+            this@UsersViewModel._users.value = users
         }
 
         override fun onUsersFetchedError(exception: String) {
             /* no-op */
+        }
+    }
+
+    inner class SeedingHandler : SeedingCommand.Callback {
+
+        override fun onSeedingSuccess() {
+            usersRepository.getAll(ListQuery(), ListQueryHandler())
         }
     }
 }
