@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import org.itstep.liannoi.androidpaging.databinding.FragmentUsersBinding
 import org.itstep.liannoi.androidpaging.presentation.common.extensions.getViewModelFactory
-import org.itstep.liannoi.androidpaging.presentation.users.adapters.UsersPagingAdapter
+import org.itstep.liannoi.androidpaging.presentation.users.paging.UsersPagingAdapter
 
 class UsersFragment : Fragment() {
 

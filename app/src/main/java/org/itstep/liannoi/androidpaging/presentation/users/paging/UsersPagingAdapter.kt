@@ -1,23 +1,23 @@
-package org.itstep.liannoi.androidpaging.presentation.users.adapters
+package org.itstep.liannoi.androidpaging.presentation.users.paging
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import org.itstep.liannoi.androidpaging.application.storage.users.models.User
 import org.itstep.liannoi.androidpaging.databinding.ItemUserBinding
 import org.itstep.liannoi.androidpaging.presentation.users.UsersDiffCallback
 import org.itstep.liannoi.androidpaging.presentation.users.UsersViewModel
 
-class UsersAdapter constructor(
+class UsersPagingAdapter constructor(
     private val viewModel: UsersViewModel
-) : ListAdapter<User, UsersAdapter.ViewHolder>(UsersDiffCallback()) {
+) : PagedListAdapter<User, UsersPagingAdapter.ViewHolder>(UsersDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder.from(parent)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(viewModel, getItem(position))
+        holder.bind(viewModel, getItem(position) ?: return)
     }
 
     ///////////////////////////////////////////////////////////////////////////

@@ -1,11 +1,11 @@
-package org.itstep.liannoi.androidpaging.application.storage.users.sources
+package org.itstep.liannoi.androidpaging.presentation.users.paging
 
 import androidx.paging.PositionalDataSource
 import org.itstep.liannoi.androidpaging.application.common.interfaces.UsersRepository
 import org.itstep.liannoi.androidpaging.application.storage.users.models.User
 import org.itstep.liannoi.androidpaging.application.storage.users.queries.ListQuery
 
-class PagingUsersDataSource constructor(
+class UsersPagingDataSource constructor(
     private val usersRepository: UsersRepository
 ) : PositionalDataSource<User>() {
 

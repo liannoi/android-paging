@@ -5,9 +5,9 @@ import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import org.itstep.liannoi.androidpaging.ServiceLocator
 import org.itstep.liannoi.androidpaging.application.storage.users.models.User
-import org.itstep.liannoi.androidpaging.application.storage.users.sources.PagingUsersDataSource
 import org.itstep.liannoi.androidpaging.presentation.common.executors.DefaultExecutor
-import org.itstep.liannoi.androidpaging.presentation.users.adapters.UsersPagingAdapter
+import org.itstep.liannoi.androidpaging.presentation.users.paging.UsersPagingAdapter
+import org.itstep.liannoi.androidpaging.presentation.users.paging.UsersPagingDataSource
 import java.util.concurrent.Executors
 
 
@@ -18,7 +18,7 @@ fun toPagedList(): PagedList<User> {
         .setPageSize(10)
         .build()
 
-    return PagedList.Builder(PagingUsersDataSource(ServiceLocator.usersRepository!!), config)
+    return PagedList.Builder(UsersPagingDataSource(ServiceLocator.usersRepository!!), config)
         .setFetchExecutor(Executors.newSingleThreadExecutor())
         .setNotifyExecutor(DefaultExecutor())
         .build()
